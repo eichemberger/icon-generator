@@ -9,7 +9,11 @@
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
-
+  images: {
+    domains: [
+        'oaidalleapiprodscus.blob.core.windows.net'
+    ]
+  },
   /**
    * If you have the "experimental: { appDir: true }" setting enabled, then you
    * must comment the below `i18n` config out.
