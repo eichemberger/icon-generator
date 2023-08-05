@@ -5,13 +5,10 @@ import { api } from "~/utils/api";
 import {Input} from "~/components/Input";
 import {FormGroup} from "~/components/FormGroup";
 import React, {useState} from "react";
-import {signIn, signOut, useSession} from "next-auth/react";
 import {Button} from "~/components/Button";
 import Image from "next/image";
-import {useBuyCredits} from "~/hooks/useBuyCredits";
 
 const GeneratePage: NextPage = () => {
-    const { buyCredits } = useBuyCredits();
 
     const [form, setForm] = useState({
         prompt: '',
@@ -38,10 +35,6 @@ const GeneratePage: NextPage = () => {
         )}
     }
 
-    const session = useSession();
-
-    const isLoggedIn = !!session.data;
-
     function handleFormSubmit(e: React.FormEvent) {
         e.preventDefault();
         generateIcon.mutate({
@@ -60,25 +53,6 @@ const GeneratePage: NextPage = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <main className="flex flex-col min-h-screen justify-center items-center">
-                {
-                    !isLoggedIn &&
-                    <Button onClick={() => {
-                        signIn().catch(console.error)
-                    }}>Login</Button>
-                }
-                {
-                    isLoggedIn && (
-                        <>
-                            <Button onClick={() => {
-                                buyCredits().catch(console.error)
-                            }}>Buy more credits</Button>
-                            <Button onClick={() => {
-                                signOut().catch(console.error)
-                            }}>Logout</Button>
-                        </>
-
-                    )
-                }
                 <form className="flex flex-col gap-4"
                     onSubmit={handleFormSubmit}
                 >
