@@ -27,6 +27,10 @@ const server = z.object({
   AWS_ACCESS_KEY_ID: z.string(),
   BUCKET_NAME: z.string(),
   AWS_REGION: z.string(),
+  STRIPE_SECRET_KEY: z.string(),
+  HOST_NAME: z.string(),
+  PRICE_ID: z.string(),
+  STRIPE_WEBHOOK_SECRET: z.string(),
 });
 
 /**
@@ -35,6 +39,7 @@ const server = z.object({
  */
 const client = z.object({
   // NEXT_PUBLIC_CLIENTVAR: z.string().min(1),
+  NEXT_PUBLIC_STRIPE_KEY: z.string(),
 });
 
 /**
@@ -56,6 +61,11 @@ const processEnv = {
   AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
   BUCKET_NAME: process.env.BUCKET_NAME,
   AWS_REGION: process.env.AWS_REGION,
+  NEXT_PUBLIC_STRIPE_KEY: process.env.NEXT_PUBLIC_STRIPE_KEY,
+  STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
+  HOST_NAME: process.env.HOST_NAME,
+  PRICE_ID: process.env.PRICE_ID,
+  STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
   // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
 };
 

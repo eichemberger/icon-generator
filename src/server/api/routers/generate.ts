@@ -31,17 +31,15 @@ const s3 = new AWS.S3({
 async function generateIcon(prompt: string): Promise<string> {
     if (env.MOCK_DALLE === 'true') {
         return b64Image;
-    } else {
-        const response = await openai.createImage({
-            prompt,
-            n: 1,
-            size: "1024x1024",
-            response_format: 'b64_json'
-        });
-
-        return response.data.data[0]?.b64_json || "";
     }
+    const response = await openai.createImage({
+        prompt,
+        n: 1,
+        size: "1024x1024",
+        response_format: 'b64_json'
+    });
 
+    return response.data.data[0]?.b64_json || "";
 }
 
 export const generateRouter = createTRPCRouter({
