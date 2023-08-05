@@ -2,8 +2,10 @@ import {PrimaryLink} from "~/components/PrimaryLink";
 import {signIn, signOut, useSession} from "next-auth/react";
 import {Button} from "~/components/Button";
 import React from "react";
+import {useBuyCredits} from "~/hooks/useBuyCredits";
 
 export function Header() {
+    const { buyCredits } = useBuyCredits();
 
     const session = useSession();
 
@@ -19,21 +21,31 @@ export function Header() {
                 </li>
             </ul>
 
-            <ul>
-                <li>
+            <ul className="flex gap-5">
                     {
                         isLoggedIn &&
-                        <Button variant={'secondary'} onClick={() => {
-                            signOut().catch(console.error)
-                        }}>Logout</Button>
+                        <>
+                            <li>
+                                <Button onClick={() => {
+                                    buyCredits().catch(console.error)
+                                }}>Buy more credits</Button>
+                            </li>
+                            <li>
+
+                                <Button variant={'secondary'} onClick={() => {
+                                    signOut().catch(console.error)
+                                }}>Logout</Button>
+                            </li>
+                        </>
                     }
                     {
                         !isLoggedIn &&
-                        <Button onClick={() => {
-                            signIn().catch(console.error)
-                        }}>Login</Button>
+                        <li>
+                            <Button onClick={() => {
+                                signIn().catch(console.error)
+                            }}>Login</Button>
+                        </li>
                     }
-                </li>
             </ul>
         </header>
     );
