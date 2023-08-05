@@ -12,6 +12,9 @@ import {env} from "~/env.mjs";
 import {b64Image} from "~/data/b64Image";
 import AWS from 'aws-sdk';
 
+const BUCKET_NAME = env.BUCKET_NAME;
+const AWS_REGION = env.AWS_REGION;
+
 const configuration = new Configuration({
     apiKey: env.DALLE_API_KEY,
 });
@@ -22,7 +25,7 @@ const s3 = new AWS.S3({
         accessKeyId: env.AWS_ACCESS_KEY_ID,
         secretAccessKey: env.AWS_SECRET_ACCESS_KEY,
     },
-    region: 'us-east-1'
+    region: AWS_REGION,
 });
 
 async function generateIcon(prompt: string): Promise<string> {
@@ -77,7 +80,7 @@ export const generateRouter = createTRPCRouter({
         })
 
         await s3.putObject({
-            Bucket: 'dalle-icon-generator-prod',
+            Bucket: BUCKET_NAME,
             Body: Buffer.from(base64EncodedImage, 'base64'),
             Key: icon.id,
             ContentEncoding: 'base64',
@@ -85,7 +88,7 @@ export const generateRouter = createTRPCRouter({
         }).promise();
 
         return {
-            imageUrl: base64EncodedImage
+            imageUrl: `https://${BUCKET_NAME}.s3.amazonaws.com/${icon.id}`
         }
     })
 });

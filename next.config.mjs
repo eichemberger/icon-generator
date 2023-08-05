@@ -11,7 +11,7 @@ const config = {
   reactStrictMode: true,
   images: {
     domains: [
-        'oaidalleapiprodscus.blob.core.windows.net'
+        `${process.env.BUCKET_NAME}.s3.amazonaws.com`
     ]
   },
   /**
