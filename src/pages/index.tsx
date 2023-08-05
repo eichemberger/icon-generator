@@ -1,6 +1,5 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import { signIn, signOut, useSession } from "next-auth/react";
 
 import { api } from "~/utils/api";
 import Image from "next/image";
@@ -8,20 +7,19 @@ import {PrimaryLinkButton} from "~/components/PrimaryLinkButton";
 
 function HeroBanner() {
   return (
-      <section className="grid grid-cols-2 gap-12 px-8 mt-24">
+      <section className="grid grid-cols-1 gap-12 px-8 mt-12 sm:mt-24 sm:grid-cols-2">
           <div className="flex flex-col gap-4">
               <h1 className="text-6xl">Generate icons with the click of a button</h1>
               <p className="text-2xl">Use AI to generate icons on the flight</p>
               <PrimaryLinkButton href="/generate">Generate your Icons</PrimaryLinkButton>
         </div>
-        <div>
-            <Image
-                src="/banner.png"
-                alt="An image of a bunch icons"
-                width="300"
-                height="300"
-            />
-        </div>
+        <Image
+            src="/banner.png"
+            alt="An image of a bunch icons"
+            width="300"
+            height="300"
+            className="order-first sm:-order-none"
+        />
       </section>
   );
 }

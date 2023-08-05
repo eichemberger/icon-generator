@@ -1,6 +1,6 @@
 import Link, {type LinkProps} from "next/link";
 import React, {type ReactNode} from "react";
-import {buttonColor} from "~/config/colors";
+import {buttonColor} from "~/config/constants";
 import clsx from "clsx";
 
 export function PrimaryLinkButton(props: LinkProps & { children: ReactNode}) {
