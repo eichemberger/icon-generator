@@ -12,41 +12,62 @@ export function Header() {
     const isLoggedIn = !!session.data;
 
     return (
-        <header className="px-4 container mx-auto dark:bg-gray-800 flex justify-between h-16 items-center">
-            <PrimaryLink href="/">Icon Generator</PrimaryLink>
-
-            <ul>
-                <li>
-                    <PrimaryLink href="/generate">Generate</PrimaryLink>
-                </li>
-            </ul>
-
-            <ul className="flex gap-5">
-                    {
-                        isLoggedIn &&
+        <header className="dark:bg-gray-900">
+            <div className="container mx-auto flex h-16 items-center justify-between px-4">
+                <PrimaryLink href="/">Icon Generator</PrimaryLink>
+                <ul className="flex gap-4">
+                    <li>
+                        <PrimaryLink href="/generate">Generate</PrimaryLink>
+                    </li>
+                    <li>
+                        <PrimaryLink href="/community">Community</PrimaryLink>
+                    </li>
+                    {isLoggedIn && (
+                        <li>
+                            <PrimaryLink href="/collection">Collection</PrimaryLink>
+                        </li>
+                    )}
+                </ul>
+                <ul className="flex gap-4">
+                    {isLoggedIn && (
                         <>
+                            <div className="flex items-center">
+                                Credits remaining { /* credits.data*/ }
+                            </div>
                             <li>
-                                <Button onClick={() => {
-                                    buyCredits().catch(console.error)
-                                }}>Buy more credits</Button>
+                                <Button
+                                    onClick={() => {
+                                        buyCredits().catch(console.error);
+                                    }}
+                                >
+                                    Buy Credits
+                                </Button>
                             </li>
                             <li>
-
-                                <Button variant={'secondary'} onClick={() => {
-                                    signOut().catch(console.error)
-                                }}>Logout</Button>
+                                <Button
+                                    variant="secondary"
+                                    onClick={() => {
+                                        signOut().catch(console.error);
+                                    }}
+                                >
+                                    Logout
+                                </Button>
                             </li>
                         </>
-                    }
-                    {
-                        !isLoggedIn &&
+                    )}
+                    {!isLoggedIn && (
                         <li>
-                            <Button onClick={() => {
-                                signIn().catch(console.error)
-                            }}>Login</Button>
+                            <Button
+                                onClick={() => {
+                                    signIn().catch(console.error);
+                                }}
+                            >
+                                Login
+                            </Button>
                         </li>
-                    }
-            </ul>
+                    )}
+                </ul>
+            </div>
         </header>
     );
 }
