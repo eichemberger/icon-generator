@@ -40,6 +40,7 @@ const server = z.object({
 const client = z.object({
   // NEXT_PUBLIC_CLIENTVAR: z.string().min(1),
   NEXT_PUBLIC_STRIPE_KEY: z.string(),
+  NEXT_PUBLIC_BUCKET_NAME: z.string(),
 });
 
 /**
@@ -66,8 +67,8 @@ const processEnv = {
   HOST_NAME: process.env.HOST_NAME,
   PRICE_ID: process.env.PRICE_ID,
   STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
-  // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
-};
+  NEXT_PUBLIC_BUCKET_NAME: process.env.NEXT_PUBLIC_BUCKET_NAME,
+}
 
 // Don't touch the part below
 // --------------------------
