@@ -3,6 +3,7 @@ import {signIn, signOut, useSession} from "next-auth/react";
 import {Button} from "~/components/Button";
 import React from "react";
 import {useBuyCredits} from "~/hooks/useBuyCredits";
+import {api} from "~/utils/api";
 
 export function Header() {
     const { buyCredits } = useBuyCredits();
@@ -10,6 +11,10 @@ export function Header() {
     const session = useSession();
 
     const isLoggedIn = !!session.data;
+
+    const credits = api.user.getCredits.useQuery(undefined, {
+        enabled: isLoggedIn,
+    });
 
     return (
         <header className="dark:bg-gray-900">
@@ -32,7 +37,7 @@ export function Header() {
                     {isLoggedIn && (
                         <>
                             <div className="flex items-center">
-                                Credits remaining { /* credits.data*/ }
+                                Credits remaining { credits.data }
                             </div>
                             <li>
                                 <Button
